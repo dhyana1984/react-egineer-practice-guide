@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>create portal</title>
+    <script src="../../js/react.js"></script>
+    <script src="../../js/react-dom.js"></script>
+    <script src="../../js/babel.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <div id="box"></div>
+    <!-- use babel to coompile jsx syntax-->
+    <script type="text/babel">
+        const Child = () => ReactDOM.createPortal(
+            <p>this is a createPortal API instance</p>,
+            //add 'this is a createPortal API instance' to box element
+            document.querySelector("#box")
+        )
+        const App = () => (
+            <div>
+                <h1>Hello React</h1>
+                <Child />
+            </div>)
+        ReactDOM.render(
+            <App />,
+            document.querySelector("#root"),
+            () => console.log("add App component to root element")
+        )
+    </script>
+</body>
+
+</html>
