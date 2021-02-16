@@ -1,41 +1,24 @@
-import React, { Component } from 'react';
-import Dl from './dl'
-import data from './data'
-import { Provider } from './context'
-import Child from './child'
+import React from 'react';
+import { Route, Switch } from 'react-router-dom'
+import Nav from './component/Nav'
+import { routes } from './route/router'
 
-// function App() {
-//   return (
-//     <h1>Hello React</h1>)
-// }
-
-class App extends Component {
-  state = { openName: "" }
-
-  changeOpen = openName => {
-    this.setState({ openName })
-  }
-
-  render() {
-    let { openName } = this.state
-    return (
-      <Provider value={{ info: "data need pass to child" }}>
-        <div className="friend-list">
-          {
-            Object.keys(data).map(itemName =>
-              <Dl
-                key={itemName}
-                dlData={data[itemName]}
-                openName={openName}
-                changeOpen={this.changeOpen}
-                name={itemName}
-              />)
-          }
-        </div>
-        <Child />
-      </Provider>
-    )
-  }
+function App() {
+  return <>
+    {/* navigator part */}
+    <Nav />
+    {/* the page need to render part */}
+    <Switch>
+      {routes.map(item =>
+        <Route
+          key={item.path}
+          path={item.path}
+          exact={item.exact}
+          render={item.render}
+        />
+      )}
+    </Switch>
+  </>
 }
 
 export default App;
